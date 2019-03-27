@@ -46,7 +46,51 @@ router.get('/', async (req,res) => {
 
     res.status(200).json(reply);
   } catch(error) {
+    res.status(500).json(error); 
+  }
+})
+
+router.get('/api/cohorts/:id', async (req,res) => {
+  const {id} = req.params;
+
+  try { 
+    let reply = await Cohorts.from("cohorts").where('id', id);
+    
+    res.status(200).json(reply);
+  } catch(error) {
     res.status(500).json(error);
+  }
+})
+
+router.put('/api/cohorts/:id', async (req,res) => {
+  const {id} = req.params;
+  const {name} = req.body;
+
+  if (!name) {
+    res.status(400).json({ error: "Not enough nomenclature."})
+  } else {
+
+    try { 
+      let reply = await Cohorts("cohorts").where('id', id).update({ name });
+
+      res.status(202).json(reply);
+    } catch(error) {
+      res.status(500).json({ error: "The DB got drunk and forgot your name." });
+    }
+
+  }
+})
+
+
+router.delete('/api/cohorts/:id', async (req,res) => {
+  const {id} = req.params;
+
+ try { 
+    let reply = await Cohorts("cohorts").where('id', id).del();
+
+    res.status(202).json(reply);
+  } catch(error) {
+    res.status(500).json({ error: "The DB broke everything EXCEPT the record you wanted gone." });
   }
 })
 
