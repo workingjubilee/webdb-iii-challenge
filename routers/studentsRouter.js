@@ -35,8 +35,8 @@ router.post('/', async (req,res) => {
   const { name, cohort_id } = req.body;
   const student = { name, cohort_id }
 
-  if (!name) {
-    res.status(400).json({ error: "Not enough nomenclature."})
+  if (!name || !cohort_id) {
+    res.status(400).json({ error: "Not enough data."})
   } else {
 
     try { 
@@ -60,7 +60,7 @@ router.get('/', async (req,res) => {
   }
 })
 
-router.get('/api/students/:id', async (req,res) => {
+router.get('/:id', async (req,res) => {
   const {id} = req.params;
 
   try { 
@@ -72,13 +72,13 @@ router.get('/api/students/:id', async (req,res) => {
   }
 })
 
-router.put('/api/students/:id', async (req,res) => {
+router.put('/:id', async (req,res) => {
   const { id } = req.params;
   const { name, cohort_id } = req.body;
-  const changes = { name, cohort_id }
+  const changes = { name, cohort_id };
 
-  if (!name) {
-    res.status(400).json({ error: "Not enough nomenclature."})
+  if (!name || !cohort_id) {
+    res.status(400).json({ error: "Not enough data."})
   } else {
 
     try { 
@@ -93,7 +93,7 @@ router.put('/api/students/:id', async (req,res) => {
 })
 
 
-router.delete('/api/students/:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
   const {id} = req.params;
 
  try { 

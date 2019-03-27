@@ -50,7 +50,7 @@ router.get('/', async (req,res) => {
   }
 })
 
-router.get('/api/cohorts/:id', async (req,res) => {
+router.get('/:id', async (req,res) => {
   const {id} = req.params;
 
   try { 
@@ -62,7 +62,7 @@ router.get('/api/cohorts/:id', async (req,res) => {
   }
 })
 
-router.put('/api/cohorts/:id', async (req,res) => {
+router.put('/:id', async (req,res) => {
   const {id} = req.params;
   const {name} = req.body;
 
@@ -82,7 +82,7 @@ router.put('/api/cohorts/:id', async (req,res) => {
 })
 
 
-router.delete('/api/cohorts/:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
   const {id} = req.params;
 
  try { 
